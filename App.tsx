@@ -22,7 +22,7 @@ function App(): JSX.Element {
         barStyle={"light-content"}
         backgroundColor={COLORS.statusBar}
       />
-      <HeaderComponent />
+      <HeaderComponent type="arrow-left" title={"My account"} />
     </SafeAreaView>
   );
 }

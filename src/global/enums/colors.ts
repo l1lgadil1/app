@@ -7,5 +7,6 @@ export enum COLORS {
   grey5 = "#e1e8ee",
   CardComment = "#86939e",
   cardbackground = "white",
+  headerTest = "white",
   statusBar = "#ff8c52",
 }

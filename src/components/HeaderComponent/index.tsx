@@ -1,5 +1,4 @@
-import React from "react";
-import type { PropsWithChildren } from "react";
+import React, { FunctionComponent } from "react";
 
 import {
 
@@ -8,33 +7,40 @@ import {
   View
 } from "react-native";
 import { PARAMETERS } from "../../global/enums/parameters";
+import { COLORS } from "../../global/enums/colors";
+import { IHeaderComponent } from "./props";
 
 
-function HeaderComponent(): JSX.Element {
-
+const HeaderComponent: FunctionComponent<IHeaderComponent> = (props): JSX.Element => {
 
   return (
     <View style={styles.header}>
       <View>
-        <Text>Back</Text>
+        <Text style={styles.headerText}>Back</Text>
       </View>
       <View>
-        <Text>
-          My account
+        <Text style={styles.headerText}>
+          {props.title}
         </Text>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   header: {
-    justifyContent:'space-between',
     flexDirection: "row",
+    gap: 30,
     height: PARAMETERS.headerHeight,
     fontSize: 22,
     fontWeight: "bold",
-    marginHorizontal:30
+    backgroundColor: COLORS.buttons,
+    paddingLeft: 30
+  },
+  headerText: {
+    fontSize: 20,
+    color: "white",
+    fontWeight: "bold"
   }
 });
 
