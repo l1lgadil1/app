@@ -19,12 +19,12 @@ function App(): JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
-        barStyle={"light-content"}
+        barStyle={'light-content'}
         backgroundColor={COLORS.statusBar}
       />
       <HeaderComponent type="arrow-left" title={"My account"} />
     </SafeAreaView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({

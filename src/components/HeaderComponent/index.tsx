@@ -10,13 +10,13 @@ import { PARAMETERS } from "../../global/enums/parameters";
 import { COLORS } from "../../global/enums/colors";
 import { IHeaderComponent } from "./props";
 
-
 const HeaderComponent: FunctionComponent<IHeaderComponent> = (props): JSX.Element => {
 
   return (
     <View style={styles.header}>
       <View>
         <Text style={styles.headerText}>Back</Text>
+
       </View>
       <View>
         <Text style={styles.headerText}>
