@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react";
 
 import {
-
   StyleSheet,
   Text,
   View
@@ -9,20 +8,16 @@ import {
 import { PARAMETERS } from "../../global/enums/parameters";
 import { COLORS } from "../../global/enums/colors";
 import { IHeaderComponent } from "./props";
+import Icon from "react-native-vector-icons/Entypo";
 
-import Entypo from 'react-native-vector-icons/Entypo'
 const HeaderComponent: FunctionComponent<IHeaderComponent> = (props): JSX.Element => {
   return (
     <View style={styles.header}>
       <View>
-        <Text style={styles.headerText}>Back</Text>
-        <View>
-          <Entypo name={'chevron-thin-left'} style={{
-            color:'red',
-            fontSize:20
-          }} />
-
-        </View>
+        <Icon name={props.type} style={{
+          color: 'white',
+          fontSize:30
+        }} />
       </View>
       <View>
         <Text style={styles.headerText}>
@@ -36,12 +31,14 @@ const HeaderComponent: FunctionComponent<IHeaderComponent> = (props): JSX.Elemen
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
-    gap: 30,
+    alignItems: "center",
+    paddingVertical: 10,
+    gap: 5,
     height: PARAMETERS.headerHeight,
     fontSize: 22,
     fontWeight: "bold",
     backgroundColor: COLORS.buttons,
-    paddingLeft: 30
+    paddingLeft: 10
   },
   headerText: {
     fontSize: 20,

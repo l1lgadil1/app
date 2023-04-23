@@ -1,5 +1,6 @@
 
+
 export interface IHeaderComponent {
   title: string;
-  type: "arrow-left" | null
+  type: "chevron-left" | "chevron-right"
 }

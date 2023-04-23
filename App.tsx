@@ -9,21 +9,17 @@ import {
   Text,
   View
 } from "react-native";
-import HeaderComponent from "./src/components/HeaderComponent";
 import { COLORS } from "./src/global/enums/colors";
+import SignInScreen from "./src/screens/SignInScreen";
 
 
 function App(): JSX.Element {
 
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={COLORS.statusBar}
-      />
-      <HeaderComponent type="arrow-left" title={"My account"} />
-    </SafeAreaView>
+    <>
+      <SignInScreen/>
+    </>
   )
 }
 

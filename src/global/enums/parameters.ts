@@ -1,4 +1,5 @@
-export enum PARAMETERS{
-  headerHeight =50
+export enum PARAMETERS {
+  headerHeight = 50,
+
 }
 

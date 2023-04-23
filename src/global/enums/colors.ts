@@ -10,3 +10,5 @@ export enum COLORS {
   headerTest = "white",
   statusBar = "#ff8c52",
 }
+
+
