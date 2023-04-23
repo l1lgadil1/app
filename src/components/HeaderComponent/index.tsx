@@ -10,13 +10,19 @@ import { PARAMETERS } from "../../global/enums/parameters";
 import { COLORS } from "../../global/enums/colors";
 import { IHeaderComponent } from "./props";
 
+import Entypo from 'react-native-vector-icons/Entypo'
 const HeaderComponent: FunctionComponent<IHeaderComponent> = (props): JSX.Element => {
-
   return (
     <View style={styles.header}>
       <View>
         <Text style={styles.headerText}>Back</Text>
+        <View>
+          <Entypo name={'chevron-thin-left'} style={{
+            color:'red',
+            fontSize:20
+          }} />
 
+        </View>
       </View>
       <View>
         <Text style={styles.headerText}>
