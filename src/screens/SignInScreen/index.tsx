@@ -47,15 +47,15 @@ const SignInScreen: FC<ISignInScreen> = ({ navigation }) => {
               <Icon name={"eye"} color={COLORS.grey3} />
             </Animatable.View>
           </View>
+
+          <TouchableOpacity style={styles.signInButton}>
+            <Text style={styles.signInButtonTitle}>Sign-In</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.forgotPasswordButton}>
+            <Text style={styles.forgotPasswordButtonText}>Forgot password ?</Text>
+          </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.signInButton}>
-          <Text style={styles.signInButtonTitle}>Sign-In</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.forgotPasswordButton}>
-          <Text style={styles.forgotPasswordButtonText}>Forgot password ?</Text>
-        </TouchableOpacity>
 
         <View style={{
           marginVertical: 30,
@@ -79,8 +79,8 @@ const SignInScreen: FC<ISignInScreen> = ({ navigation }) => {
             <FontAwesome name={"google"} color={"white"} />
             <Text style={styles.signInWithGoogleButtonTitle}>Sign in With Google</Text>
           </TouchableOpacity>
-
         </View>
+
         <TouchableOpacity style={styles.createAnAccountButton}>
           <View style={styles.createAnAccountButtonWrapper}>
             <Text style={styles.createAnAccountButtonTitle}>Create an account</Text>
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     padding: 10,
-    gap: 10
+    gap:15
   },
   title: {
     color: COLORS.buttons,
@@ -142,7 +142,8 @@ const styles = StyleSheet.create({
     borderColor: "#FfBc52",
     height: 40,
     paddingHorizontal: 20,
-    width: "100%"
+    width: "100%",
+    marginVertical:15
   },
   signInButtonTitle: {
     color: "white",
@@ -155,7 +156,6 @@ const styles = StyleSheet.create({
   forgotPasswordButton: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 5
   },
   forgotPasswordButtonText: {
     color: COLORS.grey3,
