@@ -2,15 +2,10 @@ import React from "react";
 import type { PropsWithChildren } from "react";
 
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
-  Text,
-  View
 } from "react-native";
-import { COLORS } from "./src/global/enums/colors";
 import SignInScreen from "./src/screens/SignInScreen";
+import SignInWelcomeScreen from "./src/screens/SignInWelcomeScreen";
 
 
 function App(): JSX.Element {
@@ -18,7 +13,8 @@ function App(): JSX.Element {
 
   return (
     <>
-      <SignInScreen/>
+      <SignInWelcomeScreen/>
+      {/*<SignInScreen/>*/}
     </>
   )
 }

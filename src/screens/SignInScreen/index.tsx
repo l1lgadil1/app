@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import { TouchableOpacity, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 
 import { ISignInScreen } from "./props";
@@ -49,13 +49,13 @@ const SignInScreen: FC<ISignInScreen> = (props) => {
           </View>
         </View>
 
-        <Pressable style={styles.signInButton}>
+        <TouchableOpacity style={styles.signInButton}>
           <Text style={styles.signInButtonTitle}>Sign-In</Text>
-        </Pressable>
+        </TouchableOpacity>
 
-        <Pressable style={styles.forgotPasswordButton}>
+        <TouchableOpacity style={styles.forgotPasswordButton}>
           <Text style={styles.forgotPasswordButtonText}>Forgot password ?</Text>
-        </Pressable>
+        </TouchableOpacity>
 
         <View style={{
           marginVertical: 30,
@@ -75,17 +75,17 @@ const SignInScreen: FC<ISignInScreen> = (props) => {
           gap: 20,
           alignItems: "center"
         }}>
-          <Pressable style={styles.signInWithGoogleButton}>
+          <TouchableOpacity style={styles.signInWithGoogleButton}>
             <FontAwesome name={"google"} color={"white"} />
             <Text style={styles.signInWithGoogleButtonTitle}>Sign in With Google</Text>
-          </Pressable>
+          </TouchableOpacity>
 
         </View>
-        <Pressable style={styles.createAnAccountButton}>
+        <TouchableOpacity style={styles.createAnAccountButton}>
           <View style={styles.createAnAccountButtonWrapper}>
             <Text style={styles.createAnAccountButtonTitle}>Create an account</Text>
           </View>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
