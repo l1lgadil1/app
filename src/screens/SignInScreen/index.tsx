@@ -9,12 +9,12 @@ import { COLORS } from "../../global/enums/colors";
 import Icon from "react-native-vector-icons/Entypo";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-const SignInScreen: FC<ISignInScreen> = (props) => {
+const SignInScreen: FC<ISignInScreen> = ({ navigation }) => {
   const [isPasswordInputFocused, setIsPasswordInputFocussed] = useState<boolean>(false);
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderComponent type={"chevron-left"} title={"My account"} />
+      <HeaderComponent type={"chevron-left"} title={"My account"} navigation={navigation} />
       <View style={styles.wrapper}>
         <Text style={styles.title}>
           Sign-In

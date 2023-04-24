@@ -1,12 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../global/enums/colors";
 
 import Swiper from "react-native-swiper";
 import { Dimensions } from "react-native";
+import { ISignInWelcomeeScreen } from "./props";
 
 
-const SignInWelcomeScreen = () => {
+const SignInWelcomeScreen:FC<ISignInWelcomeeScreen> = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
@@ -64,7 +65,7 @@ const SignInWelcomeScreen = () => {
         </Swiper>
       </View>
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.signInButton}>
+        <TouchableOpacity onPress={()=>navigation.navigate('SignIn')} style={styles.signInButton}>
           <Text style={styles.signInButtonTitle}>Sign-In</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.createYourAccountButton}>

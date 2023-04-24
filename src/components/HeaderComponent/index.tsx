@@ -10,18 +10,18 @@ import { COLORS } from "../../global/enums/colors";
 import { IHeaderComponent } from "./props";
 import Icon from "react-native-vector-icons/Entypo";
 
-const HeaderComponent: FunctionComponent<IHeaderComponent> = (props): JSX.Element => {
+const HeaderComponent: FunctionComponent<IHeaderComponent> = ({navigation,type,title}): JSX.Element => {
   return (
     <View style={styles.header}>
-      <TouchableOpacity>
-        <Icon name={props.type} style={{
+      <TouchableOpacity onPress={()=>navigation.goBack()}>
+        <Icon name={type} style={{
           color: 'white',
           fontSize:30
         }} />
       </TouchableOpacity>
       <View>
         <Text style={styles.headerText}>
-          {props.title}
+          {title}
         </Text>
       </View>
     </View>
