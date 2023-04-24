@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 
 import {
   StyleSheet,
-  Text,
+  Text, TouchableOpacity,
   View
 } from "react-native";
 import { PARAMETERS } from "../../global/enums/parameters";
@@ -13,12 +13,12 @@ import Icon from "react-native-vector-icons/Entypo";
 const HeaderComponent: FunctionComponent<IHeaderComponent> = (props): JSX.Element => {
   return (
     <View style={styles.header}>
-      <View>
+      <TouchableOpacity>
         <Icon name={props.type} style={{
           color: 'white',
           fontSize:30
         }} />
-      </View>
+      </TouchableOpacity>
       <View>
         <Text style={styles.headerText}>
           {props.title}
