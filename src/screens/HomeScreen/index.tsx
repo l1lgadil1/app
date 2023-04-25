@@ -31,7 +31,7 @@ const HomeScreen: FC<IHomeScreen> = ({ navigation }) => {
   const [isButtonPickupActive, setIsButtonPickupActive] = useState<boolean>(false);
   const [isLocationButtonActive, setIsLocationButtonActive] = useState<boolean>(false);
   const [isExpressTimeButtonActive, setIsExpressButtonActive] = useState<boolean>(true);
-
+  const [currentFoodCategory,setCurrentFoodCategory] = useState<number>(0);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -106,8 +106,8 @@ const HomeScreen: FC<IHomeScreen> = ({ navigation }) => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             data={categoriesData}
-            renderItem={({ item }: { item: IFoodCategoriesCard }) => (
-              <FoodCategoriesCard categoryTitle={item.categoryTitle} />
+            renderItem={({ item,index }: { item: IFoodCategoriesCard,index:number }) => (
+              <FoodCategoriesCard  setCurrentCategory={()=>setCurrentFoodCategory(index)} currentFoodCategory={currentFoodCategory}  id={index} categoryTitle={item.categoryTitle} />
             )}
           />
 
