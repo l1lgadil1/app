@@ -10,6 +10,8 @@ import { COLORS } from "../../global/enums/colors";
 import { IHeaderComponent } from "./props";
 import Icon from "react-native-vector-icons/Entypo";
 
+import styles from './styles'
+
 const HeaderComponent: FunctionComponent<IHeaderComponent> = ({navigation,type,title}): JSX.Element => {
   return (
     <View style={styles.header}>
@@ -28,23 +30,5 @@ const HeaderComponent: FunctionComponent<IHeaderComponent> = ({navigation,type,t
   );
 };
 
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 10,
-    gap: 5,
-    height: PARAMETERS.headerHeight,
-    fontSize: 22,
-    fontWeight: "bold",
-    backgroundColor: COLORS.buttons,
-    paddingLeft: 10
-  },
-  headerText: {
-    fontSize: 20,
-    color: "white",
-    fontWeight: "bold"
-  }
-});
 
 export default HeaderComponent;

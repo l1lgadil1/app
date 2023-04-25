@@ -7,7 +7,9 @@ function App(): JSX.Element {
 
 
   return (
+    <>
       <NavigationComponent/>
+    </>
   );
 }
 
