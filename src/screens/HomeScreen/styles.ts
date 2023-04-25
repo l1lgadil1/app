@@ -56,10 +56,7 @@ const styles = StyleSheet.create({
     color: COLORS.grey2
   },
   categoriesItems: {
-    flexDirection:'row',
-    gap:20,
-    paddingVertical:10,
-    marginVertical:5
+    paddingVertical:15,
   },
   locationContainerWrapper: {
     justifyContent: "center",

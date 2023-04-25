@@ -1,24 +1,26 @@
 import React, { FC } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { IFoodCategoriesCard } from "./props";
 import { COLORS } from "../../global/enums/colors";
 
 const FoodCategories: FC<IFoodCategoriesCard> = (props) => {
   const {isActive}  = props;
   return (
-    <View style={isActive ? styles.containerActive : styles.container}>
-     <View style={styles.categoryWrap}>
-       <Text style={{
-         fontWeight: "700",
-         fontSize: 18
-       }}>
-     Image
-       </Text>
-     </View>
-      <Text style={isActive ? styles.categoryTitle : styles.categoryTitle}>
-      CategoryTitle
-      </Text>
-    </View>
+    <TouchableOpacity>
+      <View style={isActive ? styles.containerActive : styles.container}>
+        <View style={styles.categoryWrap}>
+          <Text style={{
+            fontWeight: "700",
+            fontSize: 18
+          }}>
+            Image
+          </Text>
+        </View>
+        <Text style={isActive ? styles.categoryTitle : styles.categoryTitle}>
+          {props.categoryTitle}
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -35,6 +37,7 @@ const styles = StyleSheet.create({
     paddingBottom:10
   },
   container: {
+    marginHorizontal:10,
     height: 120,
     alignItems: "center",
     justifyContent:'space-around',

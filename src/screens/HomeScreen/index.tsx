@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-import { ScrollView } from "react-native";
+import React, { FC, useEffect, useState } from "react";
+import { FlatList, ScrollView } from "react-native";
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Entypo from "react-native-vector-icons/Entypo";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
@@ -9,17 +9,34 @@ import { COLORS } from "../../global/enums/colors";
 import styles from "./styles";
 import FoodCategoriesCard from "../../components/FoodCategoriesCard";
 import { IHomeScreen } from "./props";
+import { IFoodCategoriesCard } from "../../components/FoodCategoriesCard/props";
 
-const HomeScreen:FC<IHomeScreen> = ({navigation}) => {
+
+const categoriesData = [
+  {
+    categoryTitle: "Fast food"
+  },
+  {
+    categoryTitle: "Burgers"
+  },
+  {
+    categoryTitle: "Salads"
+  },
+  {
+    categoryTitle: "Hotdog;"
+  }
+];
+const HomeScreen: FC<IHomeScreen> = ({ navigation }) => {
   const [isButtonDelieveryActive, setIsButtonDelieveryActive] = useState<boolean>(true);
   const [isButtonPickupActive, setIsButtonPickupActive] = useState<boolean>(false);
   const [isLocationButtonActive, setIsLocationButtonActive] = useState<boolean>(false);
   const [isExpressTimeButtonActive, setIsExpressButtonActive] = useState<boolean>(true);
 
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity >
+        <TouchableOpacity>
           <Entypo name={"menu"} style={{
             fontSize: 30
           }} color={"white"} />
@@ -84,14 +101,15 @@ const HomeScreen:FC<IHomeScreen> = ({navigation}) => {
             <Text style={styles.categoriesWrapperText}>Categories</Text>
           </View>
 
-          <ScrollView horizontal={true} contentContainerStyle={styles.categoriesItems}>
-            <FoodCategoriesCard />
-            <FoodCategoriesCard />
-            <FoodCategoriesCard />
-            <FoodCategoriesCard />
-            <FoodCategoriesCard />
-            <FoodCategoriesCard />
-          </ScrollView>
+          <FlatList
+            style={styles.categoriesItems}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={categoriesData}
+            renderItem={({ item }: { item: IFoodCategoriesCard }) => (
+              <FoodCategoriesCard categoryTitle={item.categoryTitle} />
+            )}
+          />
 
         </View>
 
