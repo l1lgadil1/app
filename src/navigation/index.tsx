@@ -14,7 +14,7 @@ const TabScreen = () => {
     }}
   >
     <Tab.Screen name="Home" options={{
-      headerShown: false
+      headerShown: false,
     }} component={HomeScreen} />
   </Tab.Navigator>;
 };
