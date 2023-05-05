@@ -1,44 +1,35 @@
 import React from "react";
-
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignInWelcomeScreen from "../screens/SignInWelcomeScreen";
-import SignInScreen from "../screens/SignInScreen";
-import HomeScreen from "../screens/HomeScreen";
-
+import { NavigationContainer } from "@react-navigation/native";
+import HomeScreen from "../screens/Home";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import SingleProduct from "../screens/SingleProduct";
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-function NavComponent(): JSX.Element {
+const TabScreen = () => {
+  return <Tab.Navigator
+    screenOptions={{
+    }}
+  >
+    <Tab.Screen name="Home" options={{
+      headerShown: false
+    }} component={HomeScreen} />
+  </Tab.Navigator>;
+};
 
-
+const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name={"HomeScreen"}
-          component={HomeScreen}
-          options={{
-            headerShown: false
-          }}
-        />
-        <Stack.Screen
-          name={"SignInWelcome"}
-          component={SignInWelcomeScreen}
-          options={{
-            headerShown: false
-          }}
-        />
-        <Stack.Screen
-          name={"SignIn"}
-          component={SignInScreen}
-          options={{
-            headerShown: false
-          }} />
+        <Stack.Screen name="Tab" options={{
+          headerShown: false
+        }} component={TabScreen} />
+        <Stack.Screen name='SingleProduct' component={SingleProduct} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
-
-export default NavComponent;
+export default Navigation;
