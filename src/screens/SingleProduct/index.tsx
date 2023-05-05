@@ -7,6 +7,9 @@ import Entypo from "react-native-vector-icons/Entypo";
 
 const SingleProducts = ({ route, navigation }: any) => {
   const { params } = route;
+  navigation.setOptions({
+    headerTitle:params.title
+  })
   const { data, error, isLoading, refetch } = productAPI.useFetchOneProductQuery(params.id, {});
   console.log(params);
   const [product, setProduct] = useState<IProduct>();
@@ -14,8 +17,10 @@ const SingleProducts = ({ route, navigation }: any) => {
   useEffect(() => {
     if (data) {
       setProduct(data);
+
     }
   }, [data]);
+
   console.log(product);
 
   if (!data && isLoading) {
@@ -32,7 +37,7 @@ const SingleProducts = ({ route, navigation }: any) => {
         </Text>
         <View style={styles.swiperWrapper}>
           {product &&
-            <Swiper style={styles.swiperWrapper}>
+            <Swiper autoplay={true} loop={true} style={styles.swiperWrapper}>
               {product?.images.map(link => {
                 return <Image
                   key={link}

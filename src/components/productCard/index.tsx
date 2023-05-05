@@ -12,7 +12,7 @@ const ProductCard: FC<IProduct> = (props) => {
 
   const onHandleProduct = () => {
     // @ts-ignore
-    navigation.navigate("SingleProduct", { id });
+    navigation.navigate("SingleProduct", { id,title });
   };
   return (
     <TouchableOpacity onPress={onHandleProduct}>
