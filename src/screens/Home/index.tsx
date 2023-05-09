@@ -21,6 +21,7 @@ import IonicIcons from "react-native-vector-icons/Ionicons";
 import ProductCard from "../../components/productCard";
 import { GlobalStyles } from "../../global/styles";
 import ProductSortModal from "../../components/productsSortModal";
+import { IProduct } from "../../interfaces/products";
 
 const categoryArray: string[] = [
   "smartphones",
@@ -38,9 +39,26 @@ const HomeScreen = () => {
   const products = useAppSelector(state => state.product.products);
 
   const [category, setCategory] = useState<string>();
-  const [activeSort,setActiveSort] = useState<string>("Popular");
+  const [activeSort, setActiveSort] = useState<string>("Popular");
+  const [searchValue, setSearchValue] = useState<string>("");
 
   const sortedData = !category ? products : products.filter((product) => product.category == category);
+  const searchData = sortedData.filter((item) => {
+    if (item.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())) {
+      return true;
+    }
+  });
+  const FlatListArray = (activeSort === "Popular") ? searchData : searchData.sort((a: IProduct, b: IProduct) => {
+    if (activeSort === "Novelties") {
+      return b.stock - a.stock;
+    } else if (activeSort === "Cheaper first") {
+      return a.price - b.price;
+    } else if (activeSort === "Expensive first") {
+      return b.price - a.price;
+    } else if (activeSort === "High rating") {
+      return b.rating - a.rating;
+    }
+  });
 
   useEffect(() => {
     if (data) {
@@ -56,7 +74,8 @@ const HomeScreen = () => {
         </TouchableOpacity>
         <View style={styles.textInputContainer}>
           < AntDesign name="search1" style={{ fontSize: 20, color: "gray" }} />
-          <TextInput placeholder={"Search here..."} style={{ color: "gray", width: "100%" }} />
+          <TextInput placeholder={"Search here..."} onChangeText={text => setSearchValue(text)}
+                     style={{ color: "gray", width: "100%" }} />
         </View>
       </View>
 
@@ -81,9 +100,14 @@ const HomeScreen = () => {
       </View>
       <View>
         <ScrollView horizontal={true} contentContainerStyle={styles.sortContainer}>
-          {categoryArray.map((category) => (
-            <TouchableOpacity style={styles.categoryButton} onPress={() => setCategory(category)}>
-              <Text style={{ color: "white", fontSize: 14 }}>{category}</Text>
+          {categoryArray.map((categoryTitle) => (
+            <TouchableOpacity style={{
+              ...styles.categoryButton,
+              borderWidth: categoryTitle === category && 2,
+              borderColor: GlobalStyles.colors.gray500
+            }}
+                              onPress={() => setCategory(categoryTitle)}>
+              <Text style={{ color: "white", fontSize: 14 }}>{categoryTitle}</Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -93,7 +117,7 @@ const HomeScreen = () => {
           ? <Text style={{ textAlign: "center" }}> Loading ...</Text>
           : <>
             <FlatList
-              data={sortedData}
+              data={FlatListArray}
               renderItem={
                 ({ item, index }) =>
                   <ProductCard

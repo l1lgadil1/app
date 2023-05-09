@@ -1,5 +1,14 @@
-import React, { FC, useState } from "react";
-import { Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { FC, useEffect, useRef, useState } from "react";
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from "react-native";
 import IonicIcons from "react-native-vector-icons/Ionicons";
 import { GlobalStyles } from "../../global/styles";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -13,9 +22,22 @@ interface IProductSortModal {
 const ProductSortModal: FC<IProductSortModal> = ({ activeSort, setActiveSort }) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const sortArray = ["Popular", "Novelties", "Cheaper first", "Expensive first", "High rating"];
+  const componentRef = useRef(null);
+
+  const onHandlePress = (title: string) => {
+    {
+      if (activeSort === title) {
+        setActiveSort("");
+        setIsModalVisible(false);
+      } else {
+        setActiveSort(title);
+        setIsModalVisible(false);
+      }
+    }
+  };
 
   return (
-    <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+    <TouchableOpacity ref={componentRef} onPress={() => setIsModalVisible(true)}>
       <IonicIcons name="swap-vertical" style={{ fontSize: 24, color: GlobalStyles.colors.main }} />
       <Modal
         animationType="slide"
@@ -36,14 +58,14 @@ const ProductSortModal: FC<IProductSortModal> = ({ activeSort, setActiveSort }) 
 
             <ScrollView>
               {sortArray.map((title) => {
-                return <View style={{
+                return <View key={title} style={{
                   borderBottomWidth: 1,
                   borderColor: GlobalStyles.colors.borderGrayColor,
                   paddingBottom: 10,
                   marginBottom: 10
 
                 }}>
-                  <TouchableOpacity onPress={()=>setActiveSort(title)} style={{
+                  <TouchableOpacity onPress={() => onHandlePress(title)} style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: "center"
@@ -59,7 +81,6 @@ const ProductSortModal: FC<IProductSortModal> = ({ activeSort, setActiveSort }) 
                 </View>;
               })}
             </ScrollView>
-
           </View>
         </View>
       </Modal>
