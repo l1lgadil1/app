@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { productAPI } from "../../redux/api/productAPI";
 import { IProduct } from "../../interfaces/products";
@@ -8,7 +8,7 @@ import { GlobalStyles } from "../../global/styles";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { addToCart } from "../../redux/slices/cartSlice";
 
-const SingleProducts = ({ route, navigation }: any) => {
+const SingleProducts = ({ route, navigation }: any):any => {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(state => state.cart.cart);
   const [product, setProduct] = useState<IProduct>();

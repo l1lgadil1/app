@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { useAppSelector } from "../../redux/store";
 
-const Cart = () => {
+const Cart = ({navigate}:any) => {
   const cartItems = useAppSelector(state=>state.cart.cart)
+
   return (
     <View style={styles.container}>
       <View>
