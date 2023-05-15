@@ -1,11 +1,31 @@
 import React, { FC } from "react";
-import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Button, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { IProduct } from "../../../interfaces/products";
 import { GlobalStyles } from "../../../global/styles";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
-import { useAppSelector } from "../../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../../redux/store";
+import { addProductCount, deleteProduct } from "../../../redux/slices/cartSlice";
 
-const CartProduct: FC<IProduct> = ({ thumbnail, price, title, brand, count, description }) => {
+const CartProduct: FC<IProduct> = ({ thumbnail, price, title, brand, count, description, id }) => {
+  const dispatch = useAppDispatch();
+  const onHandleIncreaseCount = () => {
+    dispatch(addProductCount(id));
+  };
+  const onHandleDeleteButton = () => {
+    Alert.alert("Delete item", "?", [
+      { text: "No", onPress: () => console.log("OK Pressed") },
+      {
+        text: "Yes",
+        onPress: () => dispatch(deleteProduct(id)),
+        style: "cancel"
+      }
+
+    ]);
+  };
+  const onHandleDelete = () => {
+
+    dispatch(deleteProduct(id));
+  };
 
   return (
     <View style={styles.container}>
@@ -37,7 +57,7 @@ const CartProduct: FC<IProduct> = ({ thumbnail, price, title, brand, count, desc
       </View>
       <View style={styles.interact}>
         <View style={styles.interact_left_side}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={onHandleDeleteButton}>
             <EvilIcons name="trash" style={{ fontSize: 20, color: GlobalStyles.colors.main }} />
           </TouchableOpacity>
           <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -45,13 +65,13 @@ const CartProduct: FC<IProduct> = ({ thumbnail, price, title, brand, count, desc
               {count}
             </Text>
           </View>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={onHandleIncreaseCount}>
             <Text style={{ fontSize: 20, color: GlobalStyles.colors.main }}>
               +
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onHandleDelete}>
           <Text style={{ fontSize: 14, color: GlobalStyles.colors.main }}>
             Delete
           </Text>
@@ -98,5 +118,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderRadius: 5
-  },
+  }
 });
