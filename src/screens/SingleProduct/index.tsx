@@ -1,27 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import React, { FC, useEffect, useState } from "react";
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { productAPI } from "../../redux/api/productAPI";
 import { IProduct } from "../../interfaces/products";
 import Swiper from "react-native-swiper";
 import Entypo from "react-native-vector-icons/Entypo";
+import { GlobalStyles } from "../../global/styles";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { addToCart } from "../../redux/slices/cartSlice";
 
-const SingleProducts = ({ route, navigation }: any) => {
+const SingleProducts = ({ route, navigation }: any):any => {
+  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector(state => state.cart.cart);
+  const [product, setProduct] = useState<IProduct>();
+  const findItem = cartItems.find((item) => item.id === product?.id);
+
+
   const { params } = route;
   navigation.setOptions({
-    headerTitle:params.title
-  })
+    headerTitle: params.title
+  });
+
   const { data, error, isLoading, refetch } = productAPI.useFetchOneProductQuery(params.id, {});
   console.log(params);
-  const [product, setProduct] = useState<IProduct>();
+
 
   useEffect(() => {
     if (data) {
       setProduct(data);
-
     }
   }, [data]);
 
   console.log(product);
+  const onHandleAddToCart = () => {
+
+    if (product) {
+      dispatch(addToCart(product));
+      console.log("added");
+    }
+  };
 
   if (!data && isLoading) {
     return <Text style={{ textAlign: "center", fontSize: 20, fontWeight: "800" }}>Loading ...</Text>;
@@ -75,7 +91,16 @@ const SingleProducts = ({ route, navigation }: any) => {
         <Text style={{ marginVertical: 15, fontSize: 14, fontWeight: "500", color: "gray" }}>
           {product?.description}
         </Text>
+
+        <TouchableOpacity onPress={onHandleAddToCart} style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+          <View style={{ padding: 5, backgroundColor: GlobalStyles.colors.main, borderRadius: 5 }}>
+            <Text style={{ color: GlobalStyles.colors.borderGrayColor, fontSize: 14, fontWeight: "600" }}>
+              Add to cart {findItem && `(${findItem.count})`}
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
+
     );
   }
 };

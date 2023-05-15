@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import {
+  AppState,
   Modal,
   Pressable,
   ScrollView,
@@ -23,6 +24,7 @@ const ProductSortModal: FC<IProductSortModal> = ({ activeSort, setActiveSort }) 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const sortArray = ["Popular", "Novelties", "Cheaper first", "Expensive first", "High rating"];
   const componentRef = useRef(null);
+  const modalRef = useRef(null);
 
   const onHandlePress = (title: string) => {
     {
@@ -36,57 +38,71 @@ const ProductSortModal: FC<IProductSortModal> = ({ activeSort, setActiveSort }) 
     }
   };
 
-  return (
-    <TouchableOpacity ref={componentRef} onPress={() => setIsModalVisible(true)}>
-      <IonicIcons name="swap-vertical" style={{ fontSize: 24, color: GlobalStyles.colors.main }} />
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={isModalVisible}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-              <Text style={{ fontSize: 24, fontWeight: "600" }}>
-                Sort
-              </Text>
-              <Pressable
-                onPress={() => setIsModalVisible(!isModalVisible)}>
-                <AntDesign name="close" style={{ fontSize: 24, color: "gray" }} />
-              </Pressable>
-            </View>
 
-            <ScrollView>
-              {sortArray.map((title) => {
-                return <View key={title} style={{
-                  borderBottomWidth: 1,
-                  borderColor: GlobalStyles.colors.borderGrayColor,
-                  paddingBottom: 10,
-                  marginBottom: 10
+    const handleOutsideTouch = () => {
+      setIsModalVisible(false)
+    };
 
-                }}>
-                  <TouchableOpacity onPress={() => onHandlePress(title)} style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center"
+    const handleModalTouch = (event:any) => {
+      event.stopPropagation();
+    };
+
+return (
+  <TouchableOpacity ref={componentRef} onPress={() => setIsModalVisible(true)}>
+    <IonicIcons name="swap-vertical" style={{ fontSize: 24, color: GlobalStyles.colors.main }} />
+     <Modal
+       animationType="slide"
+       transparent={true}
+       visible={isModalVisible}
+     >
+       <TouchableWithoutFeedback onPress={handleOutsideTouch}>
+         <View ref={modalRef} style={styles.centeredView}>
+          <TouchableWithoutFeedback onPress={handleModalTouch}>
+            <View style={styles.modalView}>
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                <Text style={{ fontSize: 24, fontWeight: "600" }}>
+                  Sort
+                </Text>
+                <Pressable
+                  onPress={() => setIsModalVisible(!isModalVisible)}>
+                  <AntDesign name="close" style={{ fontSize: 24, color: "gray" }} />
+                </Pressable>
+              </View>
+
+              <ScrollView>
+                {sortArray.map((title) => {
+                  return <View key={title} style={{
+                    borderBottomWidth: 1,
+                    borderColor: GlobalStyles.colors.borderGrayColor,
+                    paddingBottom: 10,
+                    marginBottom: 10
+
                   }}>
-                    <Text style={{ fontWeight: "500", fontSize: 20 }}>{title}</Text>
-                    {
-                      (title === activeSort) && <EvilIcons name="check" style={{
-                        color: GlobalStyles.colors.main,
-                        fontSize: 24
-                      }} />
-                    }
-                  </TouchableOpacity>
-                </View>;
-              })}
-            </ScrollView>
-          </View>
-        </View>
-      </Modal>
-    </TouchableOpacity>
-  );
-};
+                    <TouchableOpacity onPress={() => onHandlePress(title)} style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center"
+                    }}>
+                      <Text style={{ fontWeight: "500", fontSize: 20 }}>{title}</Text>
+                      {
+                        (title === activeSort) && <EvilIcons name="check" style={{
+                          color: GlobalStyles.colors.main,
+                          fontSize: 24
+                        }} />
+                      }
+                    </TouchableOpacity>
+                  </View>;
+                })}
+              </ScrollView>
+            </View>
+          </TouchableWithoutFeedback>
+         </View>
+       </TouchableWithoutFeedback>
+     </Modal>
+  </TouchableOpacity>
+);
+}
+;
 
 export default ProductSortModal;
 

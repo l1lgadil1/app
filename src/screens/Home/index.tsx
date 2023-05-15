@@ -48,7 +48,7 @@ const HomeScreen = () => {
       return true;
     }
   });
-  const FlatListArray = (activeSort === "Popular") ? searchData : searchData.sort((a: IProduct, b: IProduct) => {
+  const FlatListArray = (activeSort === "Popular") ? searchData : searchData.sort((a: IProduct, b: IProduct):any => {
     if (activeSort === "Novelties") {
       return b.stock - a.stock;
     } else if (activeSort === "Cheaper first") {
