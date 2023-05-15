@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, ScrollView } from "react-native";
+import { Alert, Modal, StyleSheet, Text, Pressable, View, ScrollView, TouchableOpacity } from "react-native";
 import { useAppSelector } from "../../redux/store";
-import CartProduct from "../../components/cartProduct";
+import CartProduct from "../../components/cart/cartProduct";
+import { GlobalStyles } from "../../global/styles";
+import CartBottomComponent from "../../components/cart/cartBottomComponent";
 
 const Cart = ({ navigate }: any) => {
   const cartItems = useAppSelector(state => state.cart.cart);
+
 
   return (
     <View style={styles.container}>
@@ -19,6 +22,7 @@ const Cart = ({ navigate }: any) => {
           ))
         }
       </ScrollView>
+      <CartBottomComponent cartItems={cartItems} />
     </View>
   );
 };
@@ -26,8 +30,8 @@ const Cart = ({ navigate }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-
   }
+
 });
 
 export default Cart;

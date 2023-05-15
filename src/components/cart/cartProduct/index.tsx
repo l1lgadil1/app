@@ -1,10 +1,12 @@
 import React, { FC } from "react";
 import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { IProduct } from "../../interfaces/products";
-import { GlobalStyles } from "../../global/styles";
+import { IProduct } from "../../../interfaces/products";
+import { GlobalStyles } from "../../../global/styles";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
+import { useAppSelector } from "../../../redux/store";
 
 const CartProduct: FC<IProduct> = ({ thumbnail, price, title, brand, count, description }) => {
+
   return (
     <View style={styles.container}>
       <View style={styles.main}>
@@ -35,18 +37,22 @@ const CartProduct: FC<IProduct> = ({ thumbnail, price, title, brand, count, desc
       </View>
       <View style={styles.interact}>
         <View style={styles.interact_left_side}>
-          <View>
-            <EvilIcons name="trash" style={{ fontSize: 20 }} />
+          <TouchableOpacity style={styles.button}>
+            <EvilIcons name="trash" style={{ fontSize: 20, color: GlobalStyles.colors.main }} />
+          </TouchableOpacity>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <Text>
+              {count}
+            </Text>
           </View>
-          <Text>
-            {count}
-          </Text>
-          <Text>
-            +
-          </Text>
+          <TouchableOpacity style={styles.button}>
+            <Text style={{ fontSize: 20, color: GlobalStyles.colors.main }}>
+              +
+            </Text>
+          </TouchableOpacity>
         </View>
         <TouchableOpacity>
-          <Text>
+          <Text style={{ fontSize: 14, color: GlobalStyles.colors.main }}>
             Delete
           </Text>
         </TouchableOpacity>
@@ -62,7 +68,8 @@ const styles = StyleSheet.create({
     flex: 1,
     borderTopWidth: 2,
     borderColor: GlobalStyles.colors.borderGrayColor,
-    gap: 15
+    gap: 15,
+    marginVertical: 15
   },
   main: {
     flexDirection: "row",
@@ -75,10 +82,21 @@ const styles = StyleSheet.create({
   },
   interact: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10
   },
   interact_left_side: {
     flexDirection: "row",
-    gap: 5
-  }
+    gap: 10
+  },
+  button: {
+    height: 30,
+    width: 30,
+    justifyContent: "center",
+    borderColor: "gray",
+    alignItems: "center",
+    borderWidth: 1,
+    borderRadius: 5
+  },
 });
