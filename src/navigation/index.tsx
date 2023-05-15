@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "../screens/Home";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SingleProduct from "../screens/SingleProduct";
-import Main from "../screens/Main";
+import Cart from "../screens/Cart";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -17,7 +17,7 @@ const TabScreen = () => {
     <Tab.Screen name="Home" options={{
       headerShown: false,
     }} component={HomeScreen} />
-    <Tab.Screen name="Main" component={Main} />
+    <Tab.Screen name="Cart" component={Cart} />
   </Tab.Navigator>;
 };
 
@@ -27,7 +27,7 @@ const Navigation = () => {
 
    <NavigationContainer>
      <Stack.Navigator>
-       {/*<Stack.Screen name="Main" component={Main} />*/}
+       {/*<Stack.Screen name="Cart" component={Cart} />*/}
        <Stack.Screen name="Tab" options={{
          headerShown: false
        }} component={TabScreen} />
