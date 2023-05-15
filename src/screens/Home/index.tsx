@@ -189,5 +189,6 @@ const styles = StyleSheet.create({
     gap: 5,
     borderRadius: 10,
     width: "85%"
-  }
+  },
+
 });

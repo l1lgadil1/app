@@ -9,11 +9,13 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import IonicIcons from "react-native-vector-icons/Ionicons";
 import { Text, View } from "react-native";
 import { GlobalStyles } from "../global/styles";
+import { useAppSelector } from "../redux/store";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const CartTitle = (): any => {
+
   return (
     <View style={{ flexDirection: "row", gap: 4 }}>
       <Text>
@@ -24,6 +26,11 @@ const CartTitle = (): any => {
 };
 
 const TabScreen = () => {
+  const cartItems = useAppSelector(state => state.cart.cart);
+  const totalItemCount = cartItems.reduce((acc,obj)=>{
+    return (acc + obj?.count!);
+  },0)
+
   return <Tab.Navigator
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
