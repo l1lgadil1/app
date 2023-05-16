@@ -2,18 +2,26 @@ import React, { FC } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { GlobalStyles } from "../../../global/styles";
 import { IProduct } from "../../../interfaces/products";
+import { useNavigation } from "@react-navigation/native";
 
 interface ICartBottomComponent {
   cartItems: IProduct[];
 }
 
 const CartBottomComponent: FC<ICartBottomComponent> = ({ cartItems }) => {
+  const navigation = useNavigation();
+
   const totalItemCount = cartItems.reduce((acc, obj) => {
     return (acc + obj?.count!);
   }, 0);
   const totalItemPrice = cartItems.reduce((acc, obj) => {
     return (acc + obj.price!);
   }, 0);
+
+  const onHandleContinue = () =>{
+    navigation.navigate('DeliveryPage');
+  }
+
   return (
     <View style={styles.bottom}>
       <View style={styles.cartInfo}>
@@ -35,7 +43,7 @@ const CartBottomComponent: FC<ICartBottomComponent> = ({ cartItems }) => {
         </View>
 
       </View>
-      <TouchableOpacity style={styles.continueContainer}>
+      <TouchableOpacity onPress={onHandleContinue} style={styles.continueContainer}>
         <Text style={{ color: "white", fontSize: 18, fontWeight: "500" }}>
           Continue
         </Text>

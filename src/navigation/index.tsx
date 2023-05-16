@@ -10,6 +10,7 @@ import IonicIcons from "react-native-vector-icons/Ionicons";
 import { Text, View } from "react-native";
 import { GlobalStyles } from "../global/styles";
 import { useAppSelector } from "../redux/store";
+import DeliveryPage from "../screens/DeliveryPage";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -74,6 +75,7 @@ const Navigation = () => {
             headerShown: false
           }} component={TabScreen} />
           <Stack.Screen name="SingleProduct" component={SingleProduct} />
+          <Stack.Screen name='DeliveryPage' component={DeliveryPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
