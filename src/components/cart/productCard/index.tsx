@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { IProduct } from "../../interfaces/products";
+import { IProduct } from "../../../interfaces/products";
 import Entypo from "react-native-vector-icons/Entypo";
 import { useNavigation } from "@react-navigation/native";
 
@@ -33,7 +33,7 @@ const ProductCard: FC<IProduct> = (props) => {
           </View>
           <View style={{ flexDirection: "row", gap: 2, alignItems: "center" }}>
             {ratingArray.map((_, index) => {
-              return <Entypo name="star" style={{
+              return <Entypo name="star" key={index} style={{
                 color: index + 1 <= rating ? "red" : "black"
               }} />;
             })}

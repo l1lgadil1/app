@@ -18,7 +18,7 @@ import { setProducts } from "../../redux/slices/productSlice";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import IonicIcons from "react-native-vector-icons/Ionicons";
 
-import ProductCard from "../../components/productCard";
+import ProductCard from "../../components/cart/productCard";
 import { GlobalStyles } from "../../global/styles";
 import ProductSortModal from "../../components/productsSortModal";
 import { IProduct } from "../../interfaces/products";
@@ -189,5 +189,6 @@ const styles = StyleSheet.create({
     gap: 5,
     borderRadius: 10,
     width: "85%"
-  }
+  },
+
 });
