@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, ScrollView, TouchableOpacity } from "react-native";
 import { useAppSelector } from "../../redux/store";
 import CartProduct from "../../components/cart/cartProduct";
-import { GlobalStyles } from "../../global/styles";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CartBottomComponent from "../../components/cart/cartBottomComponent";
+import { GlobalStyles } from "../../global/styles";
 
 const Cart = ({ navigate }: any) => {
   const cartItems = useAppSelector(state => state.cart.cart);
@@ -32,6 +33,21 @@ const Cart = ({ navigate }: any) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.delivery_container}>
+      <View style={{flexDirection:'row',gap:3,alignItems:'center'}}>
+       <View style={{marginRight:10,padding:3,borderWidth:1,borderRadius:15,alignItems:'center',justifyContent:'center',borderColor:'green'}}>
+         <MaterialCommunityIcons  name='truck-delivery-outline' style={{
+           fontSize:20
+         }} />
+       </View>
+        <Text>
+          Delivery will be
+        </Text>
+        <Text style={{fontWeight:'700'}}>
+          free
+        </Text>
+      </View>
+      </View>
       {renderCart}
       {cartItems.length > 0 && <CartBottomComponent cartItems={cartItems} />}
     </View>
@@ -56,6 +72,12 @@ const styles = StyleSheet.create({
     color:'gray',
     fontSize:14,
     fontWeight:'400'
+  },
+  delivery_container:{
+    paddingVertical:10,
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center'
   }
 });
 

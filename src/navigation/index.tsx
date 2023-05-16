@@ -27,35 +27,38 @@ const CartTitle = (): any => {
 
 const TabScreen = () => {
   const cartItems = useAppSelector(state => state.cart.cart);
-  const totalItemCount = cartItems.reduce((acc,obj)=>{
+  const totalItemCount = cartItems.reduce((acc, obj) => {
     return (acc + obj?.count!);
-  },0)
+  }, 0);
 
   return <Tab.Navigator
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
-        let iconName:string;
+        let iconName: string;
 
-        if (route.name === 'Home') {
+        if (route.name === "Home") {
           iconName = focused
-            ? 'ios-home'
-            : 'ios-home-outline';
-        } else if (route.name === 'Cart') {
-          iconName = focused ? 'md-cart' : 'md-cart-outline';
+            ? "ios-home"
+            : "ios-home-outline";
+        } else if (route.name.includes("Cart")) {
+          iconName = focused ? "md-cart" : "md-cart-outline";
         }
 
         // You can return any component that you like here!
-        return <IonicIcons name={iconName!} size={size} color={color} />;
+        return (
+          <IonicIcons name={iconName!} size={size} color={color} />
+        );
       },
       tabBarActiveTintColor: GlobalStyles.colors.main,
-      tabBarInactiveTintColor: 'gray',
+      tabBarInactiveTintColor: "gray"
     })}
   >
     <Tab.Screen name="Home" options={{
       headerShown: false
     }} component={HomeScreen} />
     <Tab.Screen name="Cart" component={Cart} options={{
-      headerTitle: () => <CartTitle />
+      headerTitle: () => <CartTitle />,
+      tabBarLabel: `Cart (${totalItemCount})`,
     }} />
   </Tab.Navigator>;
 };

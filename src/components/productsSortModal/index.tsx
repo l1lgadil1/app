@@ -3,7 +3,7 @@ import {
   AppState,
   Modal,
   Pressable,
-  ScrollView,
+  ScrollView, StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,

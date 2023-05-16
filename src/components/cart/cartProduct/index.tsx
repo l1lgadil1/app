@@ -86,10 +86,12 @@ export default CartProduct;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderTopWidth: 2,
+    borderTopWidth: 1,
+    borderBottomWidth:1,
     borderColor: GlobalStyles.colors.borderGrayColor,
     gap: 15,
-    marginVertical: 15
+    paddingVertical: 15,
+    backgroundColor:'white'
   },
   main: {
     flexDirection: "row",
