@@ -75,7 +75,9 @@ const Navigation = () => {
             headerShown: false
           }} component={TabScreen} />
           <Stack.Screen name="SingleProduct" component={SingleProduct} />
-          <Stack.Screen name='DeliveryPage' component={DeliveryPage} />
+          <Stack.Screen name='DeliveryPage' options={{
+            headerTitle:'Delivery method'
+          }} component={DeliveryPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
