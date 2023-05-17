@@ -48,7 +48,7 @@ const HomeScreen = () => {
       return true;
     }
   });
-  const FlatListArray = (activeSort === "Popular") ? searchData : searchData.sort((a: IProduct, b: IProduct):any => {
+  const FlatListArray = (activeSort === "Popular") ? searchData : searchData.sort((a: IProduct, b: IProduct): any => {
     if (activeSort === "Novelties") {
       return b.stock - a.stock;
     } else if (activeSort === "Cheaper first") {
@@ -101,11 +101,8 @@ const HomeScreen = () => {
       <View>
         <ScrollView horizontal={true} contentContainerStyle={styles.sortContainer}>
           {categoryArray.map((categoryTitle) => (
-            <TouchableOpacity style={{
-              ...styles.categoryButton,
-              borderWidth: categoryTitle === category && 2,
-              borderColor: GlobalStyles.colors.gray500
-            }}
+            <TouchableOpacity key={categoryTitle}
+                              style={[styles.categoryButton, categoryTitle === category && styles.categoryButtonActive]}
                               onPress={() => setCategory(categoryTitle)}>
               <Text style={{ color: "white", fontSize: 14 }}>{categoryTitle}</Text>
             </TouchableOpacity>
@@ -173,6 +170,10 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 15
   },
+  categoryButtonActive: {
+    borderWidth: 2,
+    borderColor: GlobalStyles.colors.gray500
+  },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -189,6 +190,6 @@ const styles = StyleSheet.create({
     gap: 5,
     borderRadius: 10,
     width: "85%"
-  },
+  }
 
 });

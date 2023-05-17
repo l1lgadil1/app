@@ -19,7 +19,7 @@ const CartBottomComponent: FC<ICartBottomComponent> = ({ cartItems }) => {
   }, 0);
 
   const onHandleContinue = () =>{
-    navigation.navigate('DeliveryPage');
+    navigation.navigate('DeliveryPage' as never);
   }
 
   return (
